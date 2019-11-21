@@ -1,24 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Tree from './Component/Tree';
+import TreeNode from './Component/TreeNode';
 
 function App() {
+  let data=[
+    {title: 'Item1', children: [{title: 'Item1-1'}, {title: 'Item1-2'}]},
+    {title: 'Item2', children: [{title: 'Item2-1'}, {title: 'Item2-2', children: [{title: 'Item2-2-1'}, {title: 'Item2-2-2'}]}]}
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Tree data={data}/>
     </div>
   );
 }
