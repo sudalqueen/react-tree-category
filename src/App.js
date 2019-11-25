@@ -11,7 +11,10 @@ function App() {
         <TreeNode/>
         <TreeNode>
           <TreeNode/>
-          <TreeNode/>
+          <TreeNode>
+            <TreeNode/>
+            <TreeNode/>
+          </TreeNode>
           <TreeNode/>
         </TreeNode>
       </Tree>
