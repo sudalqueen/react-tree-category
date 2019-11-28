@@ -1,0 +1,26 @@
+ul, li{
+    list-style-type: none;
+}
+
+
+
+.node-btn::before{
+    color: skyblue;
+    content: '\25bc';
+    cursor: pointer;
+    font-size: 15px;
+    margin: 2px;
+}
+
+.node-border{
+    width: 100px;
+    display: none;
+}
+
+.node-border-line{
+    border: dashed 1px skyblue;
+}
+
+.drag-over{
+    color: skyblue;
+}

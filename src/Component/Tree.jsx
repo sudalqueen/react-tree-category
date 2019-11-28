@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+import "../style/Tree.css";
 
 const Tree = props => {
     let dragItem;
 
     function dragStart(event) {
         dragItem = event.target;
-        console.log("drag",event.target);
-        event.dataTransfer.effectAllowed  = 'move';
+        event.dataTransfer.effectAllowed = 'move';
     }
 
     function dragOver(event) {
@@ -19,18 +21,20 @@ const Tree = props => {
     }
 
     function dragEnter(event) {
-
+        event.target.classList.add('drag-over');
     }
 
     function dragLeave(event) {
-
+        event.stopPropagation();
+        event.target.classList.remove('drag-over');
     }
 
     function dragDrop(event) {
-        console.log("drop",event.target);
+        event.target.classList.remove('drag-over');
+
         if (dragItem != event.target) {
-            let dropItemUl = event.target.getElementsByTagName('UL')[0];
-            if(!dragItem.contains(dropItemUl)){
+            const dropItemUl = event.target.getElementsByTagName('UL')[0];
+            if (!dragItem.contains(dropItemUl)) {
                 dropItemUl.appendChild(dragItem);
             }
         }
@@ -46,18 +50,30 @@ const Tree = props => {
     }
 
     useEffect(() => {
-        const nodes = document.getElementsByClassName('node');
-        [].forEach.call(nodes, function (node) {
-            addEventsDragAndDrop(node);
-        });
+        if (props.draggable) {
+            const nodes = document.getElementsByClassName('node');
+            [].forEach.call(nodes, function (node) {
+                addEventsDragAndDrop(node);
+            });
+        }
     }, []);
 
 
     return (
-        <ul>
+        <ul className={props.className}>
             {props.children}
         </ul>
     )
 };
 
 export default Tree;
+
+Tree.propTypes = {
+    className: PropTypes.string,
+    draggable: PropTypes.bool
+}
+
+Tree.defaultProps = {
+    className: null,
+    draggable: true
+}
